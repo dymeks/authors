@@ -1,4 +1,5 @@
 const authors = require("../controllers/authors.js");
+const quotes = require("../controllers/quotes.js");
 
 module.exports = function(app){
     app.get('/authors',function(req,res){
@@ -20,4 +21,20 @@ module.exports = function(app){
     app.delete('/authors/:id',function(req,res){
         authors.deleteAuthor(req,res);
     })
+    app.get('/quotes',function(req,res){
+        quotes.getAllQuotes(req,res);
+    })
+
+    app.post('/quotes/:authorId',function(req,res){
+        quotes.createQuote(req,res);
+    })
+
+    app.put('/quotes/:authorId',function(req,res){
+        quotes.updateQuote(req,res);
+    })
+
+    app.delete('/quotes/:authorId',function(req,res){
+        quotes.deleteQuote(req,res);
+    })
+    
 }

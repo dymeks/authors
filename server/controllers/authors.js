@@ -1,6 +1,4 @@
-var Schemas = require("../models/author.js");
-var Author = Schemas.author;
-var Quote = Schemas.quote;
+var Author = require("../models/author.js")['author'];
 
 module.exports = {
 
