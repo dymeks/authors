@@ -3,23 +3,81 @@ var Author = Schemas.author;
 var Quote = Schemas.quote;
 
 module.exports = {
+
+    //Gets all authors.
     getAllAuthors: function(req,res){
-        res.json({response:"I got all users"});
+        Author.find({},function(err,authors){
+            result = {}
+            if(err){
+                result['status'] = false;
+                result['body'] = err;
+            } else {
+                result['status'] = true;
+                result['authors'] = authors;
+            }
+            res.json(result);
+        })
     },
+    //Creates an Author.
     createAuthor: function(req,res){
-        res.json("I created all users");
+        var author = new Author({
+            name:req.body.name
+        })
+
+        author.save(function(err){
+            var result = {};
+            if(err){
+                result['status']=false;
+                result['body'] = err;
+            } else {
+                result['status'] = true;
+                result['body'] = "success!";
+            }
+            res.json(result);
+        })
     },
+    //Get a single author.
     getAuthor: function(req,res){
-        res.json("I got an user");
-    },
-    editAuthor:function(req,res){
-        res.json("I'm editing users");
+       
+        Author.findById(req.params.id,function(err,author){
+            result = {};
+            if(err){
+                result['status']=false;
+                result['body'] = err;
+            } else {
+                result['status'] = true;
+                result['author'] = author;
+            }
+            res.json(result);
+        });
+        
     },
     updateAuthor:function(req,res){
-        res.json("I'm updating users");
+        Author.findByIdAndUpdate(req.params.id,req.body,function(err,author){
+            result = {};
+            if(err){
+                result['status']=false;
+                result['body'] = err;
+            } else {
+                result['status'] = true;
+                result['author'] = author;
+            }
+            res.json(result);
+        })
     },
+    //delete an author.
     deleteAuthor:function(req,res){
-        res.json({name:"I'm deleting users"});
+        Author.findByIdAndRemove(req.params.id,function(err,author){
+            result = {};
+            if(err){
+                result['status']=false;
+                result['body'] = err;
+            } else {
+                result['status'] = true;
+                result['author'] = author; //returns the original author back.
+            }
+            res.json(result);
+        });
     },
     
 
