@@ -6,7 +6,7 @@ var QuotesSchema = new mongoose.Schema({
 },{timestamps:true})
 
 var AuthorsSchema = new mongoose.Schema({
-    name:{type:String,required:"The Name Field is Required."},
+    name:{type:String,required:"The Name Field is Required.",minlength:[3,"Name must be at least 3 characters"]},
     quotes:[QuotesSchema]
 },{timestamps:true})
 

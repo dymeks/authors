@@ -1,3 +1,22 @@
-<p>
-  home works!
-</p>
+<div>
+  <a href="/new">Add an author</a>
+  <p>We have quotes by:</p>
+  <table *ngIf="allAuthors">
+    <thead>
+      <th>Author</th>
+      <th>Actions Availible</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of allAuthors">
+        <td>{{author.name}}</td>
+        <td>
+          <button [routerLink]="['/edit/',author._id]">Edit</button>
+          <button (click)="showQuotes(author._id)">See Quotes</button>
+          <button (click)="deleteAuthor(author._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

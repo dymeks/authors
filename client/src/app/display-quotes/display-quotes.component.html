@@ -1,0 +1,23 @@
+<div>
+    <a href="/home">Home</a>
+  <h1>All Quotes from {{author.name}}</h1>
+  <p>Add a Quote:</p>
+  <form (submit)="newQuote()" action="">
+    <input type="text" name="Quote.quote" [(ngModel)]="Quote.quote" required minlength='3' #quote1="ngModel">
+    <button [disabled]= "!quote1.valid" type="submit">Submit</button>
+   
+  </form>
+  
+  <div *ngIf="!quote1.valid">
+      <div *ngIf="quote1.errors.required">
+        This field is required!
+      </div>
+      <div *ngIf="quote1.errors.minlength">
+        The quote must be at least 3 letters.
+      </div>
+    </div>
+  
+  <ul>
+    <li *ngFor="let quote of author.quotes">{{quote.quote}}</li>
+  </ul>
+</div>
